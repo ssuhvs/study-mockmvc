@@ -25,4 +25,8 @@ public class AuthUser implements Serializable {
     private String account;
     @Column(length = 64)
     private String pwd;
+    
+    
+    
 }
+
