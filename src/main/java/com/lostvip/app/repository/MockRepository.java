@@ -1,8 +1,9 @@
-package com.ww.repository;
+package com.lostvip.app.repository;
 
-import com.ww.pojo.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.lostvip.app.pojo.AuthUser;
 
 /**
  * @Program: study-mockmvc

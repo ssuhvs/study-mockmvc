@@ -1,8 +1,11 @@
-package com.ww.pojo;
+package com.lostvip.app.pojo;
 
 import lombok.Data;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 @Data
@@ -23,6 +26,8 @@ public class AuthUser implements Serializable {
     private String name;
     @Column(length = 32)
     private String account;
+    
+    @JsonIgnore
     @Column(length = 64)
     private String pwd;
     

@@ -9,7 +9,7 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ww</groupId>
+	<groupId>com.lostvip.app</groupId>
 	<artifactId>study-mockmvc</artifactId>
 	<version>1.0-SNAPSHOT</version>
 

@@ -1,6 +1,6 @@
-package com.ww.service;
+package com.lostvip.app.service;
 
-import com.ww.pojo.AuthUser;
+import com.lostvip.app.pojo.AuthUser;
 
 /**
  * @Program: study-mockmvc

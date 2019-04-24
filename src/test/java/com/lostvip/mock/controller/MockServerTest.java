@@ -1,4 +1,4 @@
-package com.ww.mock.controller;
+package com.lostvip.mock.controller;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

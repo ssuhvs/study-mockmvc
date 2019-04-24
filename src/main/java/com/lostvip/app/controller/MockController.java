@@ -1,12 +1,13 @@
-package com.ww.controller;
+package com.lostvip.app.controller;
 
-import com.ww.pojo.AuthUser;
-import com.ww.service.MockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.lostvip.app.pojo.AuthUser;
+import com.lostvip.app.service.MockService;
 
 /**
  * @Program: study-mockmvc

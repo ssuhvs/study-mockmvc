@@ -1,10 +1,11 @@
-package com.ww.service.impl;
+package com.lostvip.app.service.impl;
 
-import com.ww.pojo.AuthUser;
-import com.ww.repository.MockRepository;
-import com.ww.service.MockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.lostvip.app.pojo.AuthUser;
+import com.lostvip.app.repository.MockRepository;
+import com.lostvip.app.service.MockService;
 
 /**
  * @Program: study-mockmvc

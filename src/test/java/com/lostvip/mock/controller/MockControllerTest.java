@@ -1,8 +1,5 @@
-package com.ww.mock.controller;
+package com.lostvip.mock.controller;
 
-import com.ww.controller.MockController;
-import com.ww.pojo.AuthUser;
-import com.ww.service.MockService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +10,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import com.lostvip.app.controller.MockController;
+import com.lostvip.app.pojo.AuthUser;
+import com.lostvip.app.service.MockService;
 
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
