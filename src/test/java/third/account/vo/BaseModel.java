@@ -1,4 +1,4 @@
-package test.account.vo;
+package third.account.vo;
 
 import java.io.Serializable;
 

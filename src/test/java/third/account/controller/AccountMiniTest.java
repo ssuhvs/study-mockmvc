@@ -1,4 +1,4 @@
-package test.account.controller;
+package third.account.controller;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,7 +15,7 @@ import org.junit.runners.MethodSorters;
 
 import com.lostvip.app.util.HttpClientUtil;
 
-import test.account.vo.EbfBusinessAccountMini;
+import third.account.vo.EbfBusinessAccountMini;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING )
 public class AccountMiniTest {

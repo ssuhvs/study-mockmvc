@@ -81,7 +81,7 @@ public class JsonUtil {
     
     public static void main(String[] args) {
     	AuthUser a = new AuthUser();
-    	a.setAccount("test");
+    	a.setAccount("third");
 		System.out.println(objectToJson(a));
 		
 		AuthUserTest a1 = new AuthUserTest();

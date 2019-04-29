@@ -1,4 +1,4 @@
-package test.other;
+package third.other;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

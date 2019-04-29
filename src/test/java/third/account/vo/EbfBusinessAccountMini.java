@@ -1,4 +1,4 @@
-package test.account.vo;
+package third.account.vo;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
