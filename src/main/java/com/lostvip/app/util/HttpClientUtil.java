@@ -4,7 +4,9 @@
 package com.lostvip.app.util;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,12 +22,12 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 /**
  * @author songsz
@@ -44,6 +46,7 @@ public class HttpClientUtil {
     public static String sign;
     public static String signType;
 	public static String post(Object obj,String url) {
+
 		String json = JsonUtil.objectToJson(obj);
 		return post(json, url);
 	}
@@ -108,12 +111,24 @@ public class HttpClientUtil {
 		logger.info("<<<<<<" + resData);
 		return resData;
 	}
-	
-	public static String postForm(String url, Map<String, Object> params) {
-		return postForm(url, params,null);
+
+	public static String postFormObj(String url, Object obj,String token,String businessId) {
+		List<NameValuePair>  list = createParamObj(obj);
+		list.add(new BasicNameValuePair("token",token));
+		list.add(new BasicNameValuePair("businessId",businessId));
+		
+		Map header = new HashMap();
+		header.put("Content-type", "application/x-www-form-urlencoded");
+		return postForm(url, list,header);
 	}
-	
-	public static String postForm(String url, Map<String, Object> param, Map<String, Object> headers) {
+	public static String postForm(String url, Map<String, Object> params) {
+		List<NameValuePair>  list = createParam(params);
+		Map header = new HashMap();
+		header.put("Content-type", "application/x-www-form-urlencoded");
+		return postForm(url, list,header);
+	}
+
+	private static String postForm(String url, List<NameValuePair>  param, Map<String, Object> headers) {
 		// 目前HttpClient最新版的实现类为CloseableHttpClient
 		CloseableHttpClient client = HttpClients.createDefault();
 		CloseableHttpResponse response = null;
@@ -122,7 +137,7 @@ public class HttpClientUtil {
 			if (param != null) {
 				// 建立Request的对象，一般用目标url来构造，Request一般配置addHeader、setEntity、setConfig
 				HttpPost req = new HttpPost(url);
-				entity = new UrlEncodedFormEntity(createParam(param), Consts.UTF_8);
+				entity = new UrlEncodedFormEntity(param, Consts.UTF_8);
 				// setHeader,添加头文件
 				if(headers!=null && !headers.isEmpty()){
 					Set<String> keys = headers.keySet();
@@ -143,18 +158,19 @@ public class HttpClientUtil {
 				entity = response.getEntity();
 				// 用EntityUtils.toString()这个静态方法将HttpEntity转换成字符串,防止服务器返回的数据带有中文,所以在转换的时候将字符集指定成utf-8就可以了
 				String result = EntityUtils.toString(entity, "UTF-8");
-				System.out.println("-------------------------" + result + "-------------");
+				System.out.println(url);
+				System.out.println("<<<<<-------------" + result );
 				if (response.getStatusLine().getStatusCode() == 200) {
-					System.out.println(result + "-----------success------------------");
 					return result;
 				} else {
-					System.out.println(response.getStatusLine().getStatusCode() + "------------------fail-----------");
+					System.out.println(response.getStatusLine().getStatusCode() + "<<<---------fail");
 					return null;
 				}
 			}
 			return null;
 		} catch (Exception e) {
-			System.out.println("--------------------------post error: " + e);
+			e.printStackTrace();
+			//System.out.println("--------------------------post error: " + e);
 		} finally {
 			// 一定要记得把entity fully consume掉，否则连接池中的connection就会一直处于占用状态
 			try {
@@ -162,7 +178,6 @@ public class HttpClientUtil {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("---------------------------finally-------------");
 		}
 		return null;
 	}
@@ -173,6 +188,29 @@ public class HttpClientUtil {
 		if (param != null) {
 			for (String k : param.keySet()) {
 				nvps.add(new BasicNameValuePair(k, param.get(k).toString()));
+			}
+		}
+		return nvps;
+	}
+
+
+	private static List<NameValuePair> createParamObj(Object obj) {
+		// 建立一个NameValuePair数组，用于存储欲传送的参数
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		if (obj != null) {
+			Field[] arr = obj.getClass().getDeclaredFields();
+			for (Field f : arr) {
+				f.setAccessible(true);
+				String key = f.getName();
+				try {
+					Object v = f.get(obj);
+					if(v!=null){
+						nvps.add(new BasicNameValuePair(key,v.toString()));
+					}
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+
 			}
 		}
 		return nvps;

@@ -1,4 +1,4 @@
-package test;
+package test.other;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,12 +36,12 @@ public class OrderByMethodTest {
 	
 	@Test()
 	public void test11() throws IOException, JSONException {
-		String url = URL_BASE + "/zzzTest/saveZzzTest" ;
+		String url = URL_BASE + "/ebfWriteOffPersonnel/findListMapCouponUserByPage" ;
 		HashMap map = new HashMap();
 		map.put("businessId", "1");
 		map.put("token", token);
-		map.put("name", "name1");
-		map.put("age", "11");
+//		map.put("name", "name1");
+//		map.put("age", "11");
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j = new JSONObject(responseText);
 		int code = j.optInt("code");
@@ -49,26 +49,4 @@ public class OrderByMethodTest {
 		assertThat(code, equalTo(expectedCode));
 	}
 	
-	@Test()
-	public void test1() throws IOException, JSONException {
-		String url = URL_BASE + "/zzzTest/saveZzzTest" ;
-		HashMap map = new HashMap();
-		map.put("businessId", "1");
-		map.put("token", token);
-		map.put("name", "name1");
-		map.put("age", "11");
-		String responseText = HttpClientUtil.postForm(url, map);
-		JSONObject j = new JSONObject(responseText);
-		int code = j.optInt("code");
-		
-		assertThat(code, equalTo(expectedCode));
-	}
-	
-//	@Test
-//	public void testPost() throws IOException {
-//		String expected = "{\"msg\":\"登录超时！\",\"code\":2003}";
-//		String url = "http://127.0.0.1:8080";
-//		String responseText = HttpClientUtil.get(url);
-//		assertThat(responseText, equalTo(expected));
-//	}
 }
