@@ -20,7 +20,6 @@ import third.account.vo.EbfBusinessAccountMini;
 public class AccountMiniTest {
 	private Integer expectedCode = 2000;
 	private static final String URL_BASE = "http://127.0.0.1:8080";
-	
 	private static Long   test_id = null;
 	private static String g_token ;
 	
@@ -29,7 +28,7 @@ public class AccountMiniTest {
     
     @Before
     public void setUp(){
-    	test_account = "test_886";
+    	test_account = "test_111";
     	test_password = "123456";
     }
     
@@ -58,8 +57,8 @@ public class AccountMiniTest {
         
         //6 + 2 (token + businessId) 个参数
         params.setBusinessId(7L);
-		params.setBrandStoreId(214L);
-		params.setStoreId(81L);
+        params.setStoreId(214L);
+		params.setBrandStoreId(96L);
        
         params.setAccount(test_account);
         params.setPassword(test_password);
@@ -84,8 +83,9 @@ public class AccountMiniTest {
 		map.put("currentPage", "1");
 		map.put("pageSize", "10");
 		
-		map.put("brandStoreId", 214);
-		map.put("storeId", 81);
+		map.put("storeId", 214);
+		map.put("brandStoreId", 96);
+		
 		map.put("account", test_account);
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j = new JSONObject(responseText);

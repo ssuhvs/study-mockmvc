@@ -116,7 +116,7 @@ public class HttpClientUtil {
 		List<NameValuePair>  list = createParamObj(obj);
 		list.add(new BasicNameValuePair("token",token));
 		list.add(new BasicNameValuePair("businessId",businessId));
-		
+		list.add(new BasicNameValuePair("isAdmin","true"));
 		Map header = new HashMap();
 		header.put("Content-type", "application/x-www-form-urlencoded");
 		return postForm(url, list,header);
