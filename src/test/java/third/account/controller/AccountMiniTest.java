@@ -3,10 +3,9 @@ package third.account.controller;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.io.IOException;
 import java.util.HashMap;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -38,7 +37,7 @@ public class AccountMiniTest {
 	public void test0_login() throws Exception {
 		String url = URL_BASE + "/accountMini/login" ;
 		HashMap map = new HashMap();
-		map.put("businessId", "7");
+		map.put("businessId", 7);
 		map.put("password", "123456");
 		map.put("account", "ssz");
 		String responseText = HttpClientUtil.postForm(url, map);
@@ -73,6 +72,29 @@ public class AccountMiniTest {
 		test_id = j.optJSONObject("data").optLong("id");
 		assertThat(code, equalTo(expectedCode));
 	}
+	
+	@Test()
+	public void test12_findPage() throws Exception {
+		String url = URL_BASE + "/ebfBusinessAccountMini/findAllEbfBusinessAccountMiniByPage" ;
+		System.out.println("========>:"+url);
+		HashMap map = new HashMap();
+		map.put("token", g_token);
+		map.put("businessId", 7);
+		
+		map.put("currentPage", "1");
+		map.put("pageSize", "10");
+		
+		map.put("brandStoreId", 214);
+		map.put("storeId", 81);
+		map.put("account", test_account);
+		String responseText = HttpClientUtil.postForm(url, map);
+		JSONObject j = new JSONObject(responseText);
+		int code = j.optInt("code");
+		JSONArray arr = j.optJSONObject("data").optJSONArray("dataList");
+		assertThat(arr.length(), equalTo(1));
+	}
+	
+	
 	
 	/**
 	 * 登录新账号
