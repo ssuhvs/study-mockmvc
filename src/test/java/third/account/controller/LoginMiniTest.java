@@ -13,19 +13,21 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.lostvip.app.util.HttpClientUtil;
+
+import third.IConst;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING )
 public class LoginMiniTest {
-	private static final String URL_BASE = "http://127.0.0.1:8080";
 	private static String token = null; 
 	Integer expectedCode = 2000;
 	
 	@Test()
 	public void test1_login() throws IOException, JSONException {
-		String url = URL_BASE + "/accountMini/login" ;
+		String url = IConst.URL_BASE + "/accountMini/login" ;
 		HashMap map = new HashMap();
 		map.put("businessId", "7");
-		map.put("password", "111111");
 		map.put("account", "test_886");
+		map.put("password", "123456");
+		
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j =new JSONObject(responseText);
 		int code = j.optInt("code");
@@ -33,16 +35,6 @@ public class LoginMiniTest {
 		assertThat(code, equalTo(expectedCode));
 	}
 
-	@Test()
-	public void test2_checktoken() throws IOException, JSONException {
-		String url = URL_BASE + "/accountMini/isTokenExpired" ;
-		HashMap map = new HashMap();
-		map.put("token", token);
-		map.put("businessId", "7");
-		String responseText = HttpClientUtil.postForm(url, map);
-		JSONObject j =new JSONObject(responseText);
-		int code = j.optInt("code");
-		assertThat(code, equalTo(expectedCode));
-	}
+	
 
 }

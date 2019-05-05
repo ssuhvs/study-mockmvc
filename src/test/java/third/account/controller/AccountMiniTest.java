@@ -14,12 +14,12 @@ import org.junit.runners.MethodSorters;
 
 import com.lostvip.app.util.HttpClientUtil;
 
+import third.IConst;
 import third.account.vo.EbfBusinessAccountMini;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING )
 public class AccountMiniTest {
 	private Integer expectedCode = 2000;
-	private static final String URL_BASE = "http://127.0.0.1:8080";
 	private static Long   test_id = null;
 	private static String g_token ;
 	
@@ -34,7 +34,7 @@ public class AccountMiniTest {
     
 	@Test()
 	public void test0_login() throws Exception {
-		String url = URL_BASE + "/accountMini/login" ;
+		String url = IConst.URL_BASE + "/accountMini/login" ;
 		HashMap map = new HashMap();
 		map.put("businessId", 7);
 		map.put("password", "123456");
@@ -52,7 +52,7 @@ public class AccountMiniTest {
      */
 	@Test()
 	public void test11_save() throws Exception {
-		String url = URL_BASE + "/ebfBusinessAccountMini/saveEbfBusinessAccountMini" ;
+		String url = IConst.URL_BASE + "/ebfBusinessAccountMini/saveEbfBusinessAccountMini" ;
         EbfBusinessAccountMini params = new EbfBusinessAccountMini();
         
         //6 + 2 (token + businessId) 个参数
@@ -74,7 +74,7 @@ public class AccountMiniTest {
 	
 	@Test()
 	public void test12_findPage() throws Exception {
-		String url = URL_BASE + "/ebfBusinessAccountMini/findAllEbfBusinessAccountMiniByPage" ;
+		String url = IConst.URL_BASE + "/ebfBusinessAccountMini/findAllEbfBusinessAccountMiniByPage" ;
 		System.out.println("========>:"+url);
 		HashMap map = new HashMap();
 		map.put("token", g_token);
@@ -103,7 +103,7 @@ public class AccountMiniTest {
 	@Test()
 	public void test12_login() throws Exception {
 		System.out.println("2###################test12_login:"+test_account);
-		String url = URL_BASE + "/accountMini/login" ;
+		String url = IConst.URL_BASE + "/accountMini/login" ;
 		HashMap map = new HashMap();
 		// 2个参数
 		map.put("account", test_account);
@@ -121,7 +121,7 @@ public class AccountMiniTest {
 	@Test()
 	public void test20_get() throws Exception {
 		System.out.println("3###################test2_get:"+test_account);
-		String url = URL_BASE + "/ebfBusinessAccountMini/getEbfBusinessAccountMiniById" ;
+		String url = IConst.URL_BASE + "/ebfBusinessAccountMini/getEbfBusinessAccountMiniById" ;
         EbfBusinessAccountMini params = new EbfBusinessAccountMini();
         //1 + 2 (token + businessId) 个参数
         params.setId(test_id);
@@ -138,7 +138,7 @@ public class AccountMiniTest {
 	@Test()
 	public void test30_update() throws Exception {
  	System.out.println("3###################test3_update:"+test_account);
-		String url = URL_BASE + "/ebfBusinessAccountMini/updEbfBusinessAccountMini" ;
+		String url = IConst.URL_BASE + "/ebfBusinessAccountMini/updEbfBusinessAccountMini" ;
         EbfBusinessAccountMini params = new EbfBusinessAccountMini();
         
         //3 + 2 (token + businessId) 个参数
@@ -158,7 +158,7 @@ public class AccountMiniTest {
 	 */
 	@Test()
 	public void test31_login() throws Exception {
-		String url = URL_BASE + "/accountMini/login" ;
+		String url = IConst.URL_BASE + "/accountMini/login" ;
 		HashMap map = new HashMap();
 		map.put("businessId","7");
 		map.put("account", test_account);
@@ -178,7 +178,7 @@ public class AccountMiniTest {
 	 */
 	@Test()
 	public void test40_del() throws Exception {
-		String url = URL_BASE + "/ebfBusinessAccountMini/delEbfBusinessAccountMiniByIds" ;
+		String url = IConst.URL_BASE + "/ebfBusinessAccountMini/delEbfBusinessAccountMiniByIds" ;
 		HashMap map = new HashMap();
 		 //1 + 2 (token + businessId) 个参数
 		map.put("ids", test_id);
