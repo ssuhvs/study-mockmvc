@@ -22,11 +22,12 @@ public class LoginMiniTest {
 	
 	@Test()
 	public void test1_login() throws IOException, JSONException {
-		String url = IConst.URL_BASE + "/accountMini/login" ;
+		String url =  IConst.URL_BASE+"/accountMini/login" ;
 		HashMap map = new HashMap();
 		map.put("businessId", "7");
-		map.put("account", "test_886");
+		map.put("account", "633306");
 		map.put("password", "123456");
+		map.put("openId", "oVPyA4lvPUN0Qoqy6JOhtwfoiWH8");
 		
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j =new JSONObject(responseText);

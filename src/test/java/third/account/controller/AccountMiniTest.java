@@ -31,14 +31,17 @@ public class AccountMiniTest {
     	test_account = "test_111";
     	test_password = "123456";
     }
-    
+    /**
+     * 获取token
+     * @throws Exception
+     */
 	@Test()
 	public void test0_login() throws Exception {
-		String url = IConst.URL_BASE + "/accountMini/login" ;
+		String url = "http://127.0.0.1:8080/user/login" ;
 		HashMap map = new HashMap();
-		map.put("businessId", 7);
+		map.put("businessId", 1);
+		map.put("account", "admin");
 		map.put("password", "123456");
-		map.put("account", "ssz");
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j = new JSONObject(responseText);
 		int code = j.optInt("code");
