@@ -3,9 +3,11 @@ package third.account.controller;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -28,16 +30,12 @@ public class AccountMiniTest {
     
     @Before
     public void setUp(){
-    	test_account = "test_111";
+    	test_account = "you_can_not_delete1";
     	test_password = "123456";
     }
-    /**
-     * 获取token
-     * @throws Exception
-     */
 	@Test()
 	public void test0_login() throws Exception {
-		String url = "http://127.0.0.1:8080/user/login" ;
+		String url = "http://test.100smartdata.cn/user/login" ;
 		HashMap map = new HashMap();
 		map.put("businessId", 1);
 		map.put("account", "admin");
@@ -45,7 +43,7 @@ public class AccountMiniTest {
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j = new JSONObject(responseText);
 		int code = j.optInt("code");
-		g_token = j.optString("token");
+		g_token = j.optJSONObject("data").optString("token");
 		assertThat(code, equalTo(expectedCode));
 	}
 

@@ -14,12 +14,11 @@ import org.junit.runners.MethodSorters;
 
 import com.lostvip.app.util.HttpClientUtil;
 
-import third.account.vo.EbfBusinessAccountMini;
+import third.IConst;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING )
 public class AccounMiniFindPageTest {
 	private Integer expectedCode = 2000;
-	private static final String URL_BASE = "http://127.0.0.1:8080";
 	private static Long   test_id = null;
 	private static String g_token ;
 	
@@ -34,22 +33,22 @@ public class AccounMiniFindPageTest {
     
     @Test()
 	public void test0_login() throws Exception {
-		String url = URL_BASE + "/accountMini/login" ;
+		String url = "http://test.100smartdata.cn/user/login" ;
 		HashMap map = new HashMap();
-		map.put("businessId", 7);
+		map.put("businessId", 1);
+		map.put("account", "admin");
 		map.put("password", "123456");
-		map.put("account", "ssz");
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j = new JSONObject(responseText);
 		int code = j.optInt("code");
-		g_token = j.optString("token");
+		g_token = j.optJSONObject("data").optString("token");
 		assertThat(code, equalTo(expectedCode));
 	}
     
     
 	@Test()
 	public void test12_findPage() throws Exception {
-		String url = URL_BASE + "/ebfBusinessAccountMini/findAllEbfBusinessAccountMiniByPage" ;
+		String url = IConst.URL_BASE + "/ebfBusinessAccountMini/findAllEbfBusinessAccountMiniByPage" ;
 		System.out.println("========>:"+url);
 		HashMap map = new HashMap();
 		map.put("token", g_token);
@@ -58,14 +57,14 @@ public class AccounMiniFindPageTest {
 		map.put("currentPage", "1");
 		map.put("pageSize", "10");
 		
-		map.put("brandStoreId", 214);
-		map.put("storeId", 96);
-		map.put("account", test_account);
+//		map.put("brandStoreId", 214);
+//		map.put("storeId", 96);
+		map.put("account", "test");
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j = new JSONObject(responseText);
 		int code = j.optInt("code");
 		JSONArray arr = j.optJSONObject("data").optJSONArray("dataList");
-		assertThat(arr.length(), equalTo(1));
+		assertThat(code, equalTo(expectedCode));
 	}
 
 //    @Test()
