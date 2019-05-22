@@ -16,24 +16,24 @@ import com.lostvip.app.util.HttpClientUtil;
 
 import third.IConst;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING )
-public class LoginMiniTest {
+public class Login_ChangePwd {
 	private static String tokenEx = null,g_token=null; 
 	Integer expectedCode = 2000;
-	private String password = "123456" ;
-	private String passwordNew = "111111";
-	@Test()
-	public void test0_login() throws IOException, JSONException {
-		String url = "http://test.100smartdata.cn/user/login" ;
-		HashMap map = new HashMap();
-		map.put("businessId", "1");
-		map.put("password", "123456");
-		map.put("account", "admin");
-		String responseText = HttpClientUtil.postForm(url, map);
-		JSONObject j = new JSONObject(responseText);
-		int code = j.optInt("code");
-		g_token = j.optJSONObject("data").optString("token");
-		assertThat(code, equalTo(expectedCode));
-	}
+	private String passwordNew = "123456" ;
+	private String password = "111111";
+//	@Test()
+//	public void test0_login() throws IOException, JSONException {
+//		String url = "https://test.100smartdata.cn/user/login" ;
+//		HashMap map = new HashMap();
+//		map.put("businessId", "1");
+//		map.put("password", "123456");
+//		map.put("account", "admin");
+//		String responseText = HttpClientUtil.postForm(url, map);
+//		JSONObject j = new JSONObject(responseText);
+//		int code = j.optInt("code");
+//		g_token = j.optJSONObject("data").optString("token");
+//		assertThat(code, equalTo(expectedCode));
+//	}
 	
 	@Test()
 	public void test1_login() throws IOException, JSONException {
@@ -47,7 +47,7 @@ public class LoginMiniTest {
 		String responseText = HttpClientUtil.postForm(url, map);
 		JSONObject j =new JSONObject(responseText);
 		int code = j.optInt("code");
-		tokenEx = j.optJSONObject("data").optString("tokenEx");
+		g_token =	tokenEx = j.optJSONObject("data").optString("tokenEx");
 		assertThat(code, equalTo(expectedCode));
 	}
 
