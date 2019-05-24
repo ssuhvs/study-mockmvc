@@ -196,23 +196,33 @@ public class HttpClientUtil {
 
 	private static List<NameValuePair> createParamObj(Object obj) {
 		// 建立一个NameValuePair数组，用于存储欲传送的参数
-		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		if (obj != null) {
-			Field[] arr = obj.getClass().getDeclaredFields();
-			for (Field f : arr) {
-				f.setAccessible(true);
+	  List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+	  if (obj == null) {
+		   return  nvps;
+	   }
+	   Field[] arr = obj.getClass().getDeclaredFields();
+	   Class classDist = obj.getClass();
+       do{
+    	   Field fields[] = classDist.getDeclaredFields();  
+           
+           for(Field f :fields){  
+        		f.setAccessible(true);
 				String key = f.getName();
 				try {
 					Object v = f.get(obj);
+					System.out.println(key+"############"+v);
 					if(v!=null){
 						nvps.add(new BasicNameValuePair(key,v.toString()));
 					}
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				}
-
-			}
-		}
+           }//end for 
+           
+           classDist = classDist.getSuperclass();
+          // System.out.println("==========================="+classDist.getSimpleName());
+       }while(!"Object".equals(classDist.getSimpleName()) );
+		
 		return nvps;
 	}
 }

@@ -1,5 +1,6 @@
 package com.lostvip.app.controller;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,15 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: 1.0
  **/
 @RestController
-@RequestMapping(value = "mock")
-public class MockController {
-//
-//    @Autowired
-//    private MockService mockService;
+@RequestMapping(value = "/test")
+public class TestController {
 
-//    @GetMapping(value = "authUser/{id}")
-//    public AuthUser getAuthUser(@PathVariable Long id) {
-//        AuthUser authUser = mockService.getAuthUser(id);
-//        return authUser;
-//    }
+
+    @RequestMapping(value = "/index")
+    public YbfUserExtend getAuthUser(YbfUserExtend u) {
+        return u;
+    }
 }

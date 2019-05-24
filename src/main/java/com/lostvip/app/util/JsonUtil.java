@@ -9,8 +9,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostvip.app.pojo.AuthUser;
-import com.lostvip.app.pojo.AuthUserTest;
 
 
 /**
@@ -80,13 +78,13 @@ public class JsonUtil {
     
     
     public static void main(String[] args) {
-    	AuthUser a = new AuthUser();
-    	a.setAccount("third");
-		System.out.println(objectToJson(a));
-		
-		AuthUserTest a1 = new AuthUserTest();
-    	a1.setAccount("test1");
-		System.out.println(objectToJson(a1));
+//    	AuthUser a = new AuthUser();
+//    	a.setAccount("third");
+//		System.out.println(objectToJson(a));
+//		
+//		AuthUserTest a1 = new AuthUserTest();
+//    	a1.setAccount("test1");
+//		System.out.println(objectToJson(a1));
 		
 	}
 }
